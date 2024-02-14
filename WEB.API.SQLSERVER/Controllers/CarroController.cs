@@ -15,7 +15,7 @@ namespace WEB.API.SQLSERVER.Controllers
         }
 
         [HttpGet]
-        public OkObjectResult Carro()
+        public OkObjectResult ObterTodos()
         {
             var carros = _repositorio.ObterTodos();
 

@@ -1,13 +1,23 @@
-﻿using WEB.API.SQLSERVER.DOMINIO.Entidades;
-using WEB.API.SQLSERVER.DOMINIO.Enums;
+﻿using FluentValidation;
+using WEB.API.SQLSERVER.DOMINIO.Entidades;
+using WEB.API.SQLSERVER.INFRA.Interfaces;
 
 namespace WEB.API.SQLSERVER.TESTE.Mock
 {
-    public class CarroRepositorioMock : ICarroRepositorioMock
+    public class CarroRepositorioMock : ICarroRepositorio
     {
+        private List<Carro> _carros = new();
+        private readonly IValidator<Carro> _validador;
+
+        public CarroRepositorioMock(IValidator<Carro> validador)
+        {
+            _validador = validador;
+        }
+        
         public void Adicionar(Carro carro)
         {
-            ObterListaDeCarros().Add(carro);
+            _validador.ValidateAndThrow(carro);
+            _carros.Add(carro);
         }
 
         public void Atualizar(Carro carro)
@@ -30,58 +40,19 @@ namespace WEB.API.SQLSERVER.TESTE.Mock
 
         public Carro ObterPorId(int id)
         {
-            return ObterListaDeCarros().FirstOrDefault(x => x.Id == id) ??
+            return _carros.FirstOrDefault(x => x.Id == id) ??
                     throw new Exception($"Veículo não encontrado pelo indentificador [{id}]");
         }
 
         public List<Carro> ObterTodos()
         {
-            return ObterListaDeCarros();
+            return _carros;
         }
 
         public void Remover(int id)
         {
             var carroSalvo = ObterPorId(id);
-            ObterListaDeCarros().Remove(carroSalvo);
-        }
-
-        private List<Carro> ObterListaDeCarros()
-        {
-            return new List<Carro>()
-            {
-                new Carro
-                {
-                    Id = 1,
-                    DataDeCadastro = DateTime.Now,
-                    DataUltimaAtualizacao = null,
-                    Marca = "Fiat",
-                    Modelo = "147",
-                    Versao = "GL",
-                    Cor = "Vermelho",
-                    Combustivel = ECombustivel.Gasolina,
-                    Usado = true,
-                    PrecoCusto = 12550.00m,
-                    PrecoVenda = 35550.00m,
-                    AnoFabricacao = new DateTime(1987, 06, 09),
-                    AnoModelo = new DateTime(1987, 01, 01)
-                },
-                new Carro
-                {
-                    Id = 2,
-                    DataDeCadastro = DateTime.Now,
-                    DataUltimaAtualizacao = null,
-                    Marca = "Chevrolet",
-                    Modelo = "Opala",
-                    Versao = "Diplomata",
-                    Cor = "Azul",
-                    Combustivel = ECombustivel.Gasolina,
-                    Usado = true,
-                    PrecoCusto = 22550.00m,
-                    PrecoVenda = 45550.00m,
-                    AnoFabricacao = new DateTime(1991, 06, 09),
-                    AnoModelo = new DateTime(1991, 01, 01)
-                }
-            };
+            _carros.Remove(carroSalvo);
         }
     }
 }

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WEB.API.SQLSERVER.DOMINIO\WEB.API.SQLSERVER.DOMINIO.csproj" />
     <ProjectReference Include="..\WEB.API.SQLSERVER.INFRA\WEB.API.SQLSERVER.INFRA.csproj" />
+    <ProjectReference Include="..\WEB.API.SQLSERVER\WEB.API.SQLSERVER.csproj" />
   </ItemGroup>
 
 </Project>

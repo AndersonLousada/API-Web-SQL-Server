@@ -43,7 +43,7 @@ namespace WEB.API.SQLSERVER.DOMINIO.Validadores
 
         private bool ValidarAnoModelo(Carro carro)
         {
-            return carro.AnoFabricacao <= carro.AnoModelo;
+            return carro.AnoFabricacao.Year <= carro.AnoModelo.Year;
         }
 
         private bool CalcularData(DateTime anoFabricacao)

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WEB.API.SQLSERVER.DOMINIO.Entidades;
 using WEB.API.SQLSERVER.INFRA.Interfaces;
 
 namespace WEB.API.SQLSERVER.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class CarroController : ControllerBase
     {

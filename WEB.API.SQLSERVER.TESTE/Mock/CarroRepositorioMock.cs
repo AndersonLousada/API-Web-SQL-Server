@@ -22,7 +22,7 @@ namespace WEB.API.SQLSERVER.TESTE.Mock
 
         public void Atualizar(Carro carro)
         {
-            var carroSalvo = ObterPorId((int)carro.Id);
+            var carroSalvo = ObterPorId((int)carro.Id!);
 
             carroSalvo.DataDeCadastro = carro.DataDeCadastro;
             carroSalvo.DataUltimaAtualizacao = carro.DataUltimaAtualizacao;

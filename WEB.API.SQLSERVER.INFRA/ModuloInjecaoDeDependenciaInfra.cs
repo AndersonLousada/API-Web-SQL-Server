@@ -11,6 +11,7 @@ namespace WEB.API.SQLSERVER.INFRA
         public static void AddScopedInfra(this IServiceCollection service)
         {
             service.AddScoped<ICarroRepositorio, CarroRepositorio>();
+            service.AddScoped<IUserRepositorio, UserRepositorio>();
             service.AddScoped<IConexaoDB, ConexaoDB>();
             service.AddScopedDominio();
         }
